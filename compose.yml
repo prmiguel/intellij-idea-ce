@@ -1,0 +1,29 @@
+---
+services:
+  intellijideace:
+    image: binhex/arch-intellij
+    container_name: intellij-idea-ce
+    security_opt:
+      - "seccomp=unconfined"
+    environment:
+      - PUID=0
+      - PGID=0
+      # - TZ=Etc/UTC
+      - WEBPAGE_TITLE=code
+      - VNC_PASSWORD=mypassword
+      - ENABLE_STARTUP_SCRIPTS=no
+      # - UMASK=000
+    volumes:
+      - config:/config
+      - data:/data
+      # - m2:/home/nobody/.m2:rw
+      - m2:/root/.m2:rw
+      # - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 5900:5900
+      - 6080:6080
+    restart: unless-stopped
+volumes:
+  config:
+  data:
+  m2:
